@@ -1,6 +1,7 @@
-package com.d20charactersheet.to_docompose.data.models
+package com.d20charactersheet.to_docompose.data
 
 import androidx.room.*
+import com.d20charactersheet.to_docompose.data.models.ToDoTask
 import kotlinx.coroutines.flow.Flow
 
 @Dao
