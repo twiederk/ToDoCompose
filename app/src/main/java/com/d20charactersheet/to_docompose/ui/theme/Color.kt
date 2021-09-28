@@ -21,3 +21,8 @@ val NonePriorityColor = Color(0xFFFFFFFF)
 val Colors.topAppBarContentColor: Color
     @Composable
     get() = if (isLight) Color.White else LightGray
+
+val Colors.topAppBarBackgroundColor: Color
+    @Composable
+    get() = if (isLight) Purple500 else Color.Black
+

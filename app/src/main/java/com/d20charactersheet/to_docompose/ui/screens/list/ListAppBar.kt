@@ -5,6 +5,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.d20charactersheet.to_docompose.ui.theme.topAppBarBackgroundColor
 import com.d20charactersheet.to_docompose.ui.theme.topAppBarContentColor
 
 @Composable
@@ -22,7 +23,7 @@ fun DefaultListAppBar() {
                 color = MaterialTheme.colors.topAppBarContentColor
             )
         },
-        backgroundColor = MaterialTheme.colors.primary
+        backgroundColor = MaterialTheme.colors.topAppBarBackgroundColor
     )
 }
 
