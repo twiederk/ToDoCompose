@@ -1,21 +1,22 @@
 package com.d20charactersheet.to_docompose.ui.screens.list
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import com.d20charactersheet.to_docompose.R
 import com.d20charactersheet.to_docompose.components.PriorityItem
 import com.d20charactersheet.to_docompose.data.models.Priority
-import com.d20charactersheet.to_docompose.ui.theme.LARGE_PADDING
-import com.d20charactersheet.to_docompose.ui.theme.Typography
-import com.d20charactersheet.to_docompose.ui.theme.topAppBarBackgroundColor
-import com.d20charactersheet.to_docompose.ui.theme.topAppBarContentColor
+import com.d20charactersheet.to_docompose.ui.theme.*
 
 @Composable
 fun ListAppBar() {
@@ -161,6 +162,53 @@ fun DeleteAllAction(
     }
 }
 
+
+@Composable
+fun SearchAppBar(
+    text: String,
+    onTextChange: (String) -> Unit,
+    onCloseClicked: () -> Unit,
+    onSearchClicked: (String) -> Unit
+) {
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(TOP_APP_BAR_HEIGHT),
+        elevation = AppBarDefaults.TopAppBarElevation,
+        color = MaterialTheme.colors.topAppBarBackgroundColor
+    ) {
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth(),
+            value = text,
+            onValueChange = {
+                onTextChange(it)
+            },
+            placeholder = {
+                Text(
+                    text = "Search",
+                    color = Color.White
+                )
+            },
+            textStyle = TextStyle(
+                color = MaterialTheme.colors.topAppBarContentColor,
+                fontSize = MaterialTheme.typography.subtitle1.fontSize
+            ),
+            singleLine = true,
+            leadingIcon = {
+                IconButton(onClick = { }) {
+                    Icon(
+                        imageVector = Icons.Filled.Search,
+                        contentDescription = "Search Icon",
+                        tint = MaterialTheme.colors.topAppBarContentColor
+                    )
+
+                }
+            }
+        )
+    }
+}
+
 @Preview
 @Composable
 private fun DefaultLstAppBarPreview() {
@@ -168,5 +216,17 @@ private fun DefaultLstAppBarPreview() {
         onSearchClicked = {},
         onSortClicked = {},
         onDeleteClicked = {}
+    )
+}
+
+
+@Preview
+@Composable
+fun SearchAppBarPreview() {
+    SearchAppBar(
+        text = "Search",
+        onTextChange = {},
+        onCloseClicked = {},
+        onSearchClicked = {}
     )
 }
