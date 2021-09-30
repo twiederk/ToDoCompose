@@ -10,7 +10,7 @@ import com.d20charactersheet.to_docompose.util.Constants.LIST_ARGUMENT_KEY
 import com.d20charactersheet.to_docompose.util.Constants.LIST_SCREEN
 
 fun NavGraphBuilder.listComposable(
-    navigateToTaskScreen: (Int) -> Unit
+    navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
     composable(
         route = LIST_SCREEN,
