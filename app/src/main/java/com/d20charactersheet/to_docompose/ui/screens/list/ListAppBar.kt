@@ -24,6 +24,7 @@ import com.d20charactersheet.to_docompose.data.models.Priority
 import com.d20charactersheet.to_docompose.ui.theme.*
 import com.d20charactersheet.to_docompose.ui.viewmodels.SharedViewModel
 import com.d20charactersheet.to_docompose.util.SearchAppBarState
+import com.d20charactersheet.to_docompose.util.TrailingItemState
 
 @Composable
 fun ListAppBar(
@@ -44,9 +45,15 @@ fun ListAppBar(
         }
         else -> {
             SearchAppBar(
-                text = "",
-                onTextChange = {},
-                onCloseClicked = {},
+                text = searchTextState,
+                onTextChange = { newText ->
+                    sharedViewModel.searchTextState.value = newText
+                },
+                onCloseClicked = {
+                    sharedViewModel.searchAppBarState.value =
+                        SearchAppBarState.CLOSED
+                    sharedViewModel.searchTextState.value = ""
+                },
                 onSearchClicked = {}
             )
         }
@@ -196,6 +203,10 @@ fun SearchAppBar(
     onCloseClicked: () -> Unit,
     onSearchClicked: (String) -> Unit
 ) {
+    var trailingItemState by remember {
+        mutableStateOf(TrailingItemState.READY_TO_DELETE)
+    }
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -239,7 +250,20 @@ fun SearchAppBar(
             trailingIcon = {
                 IconButton(
                     onClick = {
-                        onCloseClicked()
+                        when (trailingItemState) {
+                            TrailingItemState.READY_TO_DELETE -> {
+                                onTextChange("")
+                                trailingItemState = TrailingItemState.READY_TO_CLOSE
+                            }
+                            TrailingItemState.READY_TO_CLOSE -> {
+                                if (text.isNotEmpty()) {
+                                    onTextChange("")
+                                } else {
+                                    onCloseClicked()
+                                    trailingItemState = TrailingItemState.READY_TO_DELETE
+                                }
+                            }
+                        }
                     }
                 ) {
                     Icon(
