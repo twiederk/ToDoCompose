@@ -22,20 +22,35 @@ import com.d20charactersheet.to_docompose.R
 import com.d20charactersheet.to_docompose.components.PriorityItem
 import com.d20charactersheet.to_docompose.data.models.Priority
 import com.d20charactersheet.to_docompose.ui.theme.*
+import com.d20charactersheet.to_docompose.ui.viewmodels.SharedViewModel
+import com.d20charactersheet.to_docompose.util.SearchAppBarState
 
 @Composable
-fun ListAppBar() {
-//    DefaultListAppBar(
-//        onSearchClicked = {},
-//        onSortClicked = {},
-//        onDeleteClicked = {}
-//    )
-    SearchAppBar(
-        text = "",
-        onTextChange = {},
-        onCloseClicked = {},
-        onSearchClicked = {}
-    )
+fun ListAppBar(
+    sharedViewModel: SharedViewModel,
+    searchAppBarState: SearchAppBarState,
+    searchTextState: String
+) {
+    when (searchAppBarState) {
+        SearchAppBarState.CLOSED -> {
+            DefaultListAppBar(
+                onSearchClicked = {
+                    sharedViewModel.searchAppBarState.value =
+                        SearchAppBarState.OPENED
+                },
+                onSortClicked = {},
+                onDeleteClicked = {}
+            )
+        }
+        else -> {
+            SearchAppBar(
+                text = "",
+                onTextChange = {},
+                onCloseClicked = {},
+                onSearchClicked = {}
+            )
+        }
+    }
 }
 
 
