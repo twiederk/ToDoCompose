@@ -1,5 +1,6 @@
 package com.d20charactersheet.to_docompose.components
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -30,6 +31,9 @@ fun PriorityDropDown(
     onPrioritySelected: (Priority) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
+    val angle: Float by animateFloatAsState(
+        targetValue = if (expanded) 180f else 0f
+    )
 
     Row(
         modifier = Modifier
@@ -57,14 +61,45 @@ fun PriorityDropDown(
         IconButton(
             modifier = Modifier
                 .alpha(ContentAlpha.medium)
-                .rotate(0f)
-                .weight(1.5f),
+                .rotate(angle)
+                .weight(weight = 1.5f),
             onClick = { expanded = true }
         ) {
             Icon(
                 imageVector = Icons.Filled.ArrowDropDown,
                 contentDescription = stringResource(id = R.string.drop_down_arrow)
             )
+        }
+        DropdownMenu(
+            modifier = Modifier
+                .fillMaxWidth(),
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            DropdownMenuItem(
+                onClick = {
+                    expanded = false
+                    onPrioritySelected(Priority.LOW)
+                }
+            ) {
+                PriorityItem(priority = Priority.LOW)
+            }
+            DropdownMenuItem(
+                onClick = {
+                    expanded = false
+                    onPrioritySelected(Priority.MEDIUM)
+                }
+            ) {
+                PriorityItem(priority = Priority.MEDIUM)
+            }
+            DropdownMenuItem(
+                onClick = {
+                    expanded = false
+                    onPrioritySelected(Priority.HIGH)
+                }
+            ) {
+                PriorityItem(priority = Priority.HIGH)
+            }
 
         }
     }
