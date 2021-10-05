@@ -2,6 +2,7 @@ package com.d20charactersheet.to_docompose.ui.screens.task
 
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import com.d20charactersheet.to_docompose.data.models.Priority
 import com.d20charactersheet.to_docompose.data.models.ToDoTask
 import com.d20charactersheet.to_docompose.util.Action
 
@@ -18,6 +19,16 @@ fun TaskScreen(
                 navigateToListScreen = navigateToListScreen
             )
         },
-        content = {}
+        content = {
+            TaskContent(
+                title = "",
+                onTitleChange = {},
+                description = "",
+                onDescriptionChange = {},
+                priority = Priority.LOW,
+                onPrioritySelected = {}
+            )
+
+        }
     )
 }
