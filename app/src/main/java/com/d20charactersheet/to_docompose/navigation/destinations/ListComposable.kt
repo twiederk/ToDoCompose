@@ -1,5 +1,6 @@
 package com.d20charactersheet.to_docompose.navigation.destinations
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavGraphBuilder
@@ -13,6 +14,7 @@ import com.d20charactersheet.to_docompose.util.Constants.LIST_ARGUMENT_KEY
 import com.d20charactersheet.to_docompose.util.Constants.LIST_SCREEN
 import com.d20charactersheet.to_docompose.util.toAction
 
+@ExperimentalAnimationApi
 @ExperimentalMaterialApi
 fun NavGraphBuilder.listComposable(
     navigateToTaskScreen: (taskId: Int) -> Unit,
