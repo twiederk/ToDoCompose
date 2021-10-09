@@ -4,12 +4,12 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
 import com.d20charactersheet.to_docompose.navigation.destinations.listComposable
 import com.d20charactersheet.to_docompose.navigation.destinations.splashComposable
 import com.d20charactersheet.to_docompose.navigation.destinations.taskComposable
 import com.d20charactersheet.to_docompose.ui.viewmodels.SharedViewModel
 import com.d20charactersheet.to_docompose.util.Constants.SPLASH_SCREEN
+import com.google.accompanist.navigation.animation.AnimatedNavHost
 
 @ExperimentalAnimationApi
 @ExperimentalMaterialApi
@@ -20,7 +20,7 @@ fun SetupNavigation(
 ) {
     val screen = Screens(navController = navController)
 
-    NavHost(
+    AnimatedNavHost(
         navController = navController,
         startDestination = SPLASH_SCREEN
     ) {
