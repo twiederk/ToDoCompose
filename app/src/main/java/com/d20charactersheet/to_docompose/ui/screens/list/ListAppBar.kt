@@ -26,7 +26,6 @@ import com.d20charactersheet.to_docompose.ui.theme.*
 import com.d20charactersheet.to_docompose.ui.viewmodels.SharedViewModel
 import com.d20charactersheet.to_docompose.util.Action
 import com.d20charactersheet.to_docompose.util.SearchAppBarState
-import com.d20charactersheet.to_docompose.util.TrailingItemState
 
 @Composable
 fun ListAppBar(
@@ -219,10 +218,6 @@ fun SearchAppBar(
     onCloseClicked: () -> Unit,
     onSearchClicked: (String) -> Unit
 ) {
-    var trailingItemState by remember {
-        mutableStateOf(TrailingItemState.READY_TO_DELETE)
-    }
-
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -266,19 +261,10 @@ fun SearchAppBar(
             trailingIcon = {
                 IconButton(
                     onClick = {
-                        when (trailingItemState) {
-                            TrailingItemState.READY_TO_DELETE -> {
-                                onTextChange("")
-                                trailingItemState = TrailingItemState.READY_TO_CLOSE
-                            }
-                            TrailingItemState.READY_TO_CLOSE -> {
-                                if (text.isNotEmpty()) {
-                                    onTextChange("")
-                                } else {
-                                    onCloseClicked()
-                                    trailingItemState = TrailingItemState.READY_TO_DELETE
-                                }
-                            }
+                        if (text.isNotEmpty()) {
+                            onTextChange("")
+                        } else {
+                            onCloseClicked()
                         }
                     }
                 ) {
