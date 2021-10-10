@@ -6,7 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
-import androidx.navigation.compose.navArgument
+import androidx.navigation.navArgument
 import com.d20charactersheet.to_docompose.ui.screens.list.ListScreen
 import com.d20charactersheet.to_docompose.ui.viewmodels.SharedViewModel
 import com.d20charactersheet.to_docompose.util.Constants.LIST_ARGUMENT_KEY

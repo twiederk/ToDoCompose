@@ -8,7 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
-import androidx.navigation.compose.navArgument
+import androidx.navigation.navArgument
 import com.d20charactersheet.to_docompose.ui.screens.task.TaskScreen
 import com.d20charactersheet.to_docompose.ui.viewmodels.SharedViewModel
 import com.d20charactersheet.to_docompose.util.Action
